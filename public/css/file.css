@@ -1,0 +1,13 @@
+.table-style {
+    border: 1px solid #e7e7e7
+}
+.table-style thead th {
+    border-bottom: none;
+    text-align: center;
+}
+.table-style td {
+    border-right: 1px solid #e7e7e7;
+    vertical-align: center;
+    text-align: center;
+}
+

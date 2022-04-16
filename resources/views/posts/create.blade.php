@@ -3,15 +3,30 @@
 @section('title') Create @endsection
 
 @section('content')
-      <form method="POST" action="/posts/store">
+
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-danger">{{$error}}</div>
+    @endforeach
+
+
+
+      <form method="POST" action="{{ route('posts.store') }}" style="width:500px; margin:auto; border:1px solid #ccc; padding:1rem; margin-top:20px;">
         @csrf
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Title</label>
             <input type="text" name="title" class="form-control" id="exampleFormControlInput1">
           </div>
           <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Posted by</label>
-            <input type="text" name="posted_by" class="form-control" id="exampleFormControlInput1">
+            <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+              <textarea type="text" name="description" class="form-control" id="exampleFormControlInput1"></textarea>
+          </div>
+          <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label">Posted by</label>
+              <select name="post-creator" class="form-control">
+                    @foreach ( $users as $user )
+                      <option value="{{$user->id}}">{{$user->name}}</option>
+                    @endforeach
+              </select>
           </div>
 
           <div class="mb-3">

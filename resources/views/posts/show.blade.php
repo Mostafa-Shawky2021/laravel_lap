@@ -1,37 +1,28 @@
 @extends('layout.app')
-@php
-$postData = [];
-@endphp
-@foreach ($posts as $post )
-    @if( $post['id'] == $id )
-        @php $postData = $post @endphp
-    @endif
-@endforeach
+
+@section('title') Show Page @endsection
+
 @section('content')
-<div  style="margin-top:30px;text-align:center;margin-left:auto;margin-right:auto" class="col-7">
-<div class="card" style="margin-top:30px">
-  <div class="card-header">
-    Post Info
-  </div>
-  <div class="card-body">
-    <h5 class="card-title"><span style="font-weight:bold"></h5>
-    <p class="card-text"><span style="font-weight:bold">Title: {{$postData['title']}} </p>
-    <p class="card-text"><span style="font-weight:bold">Description: Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum, error. </p>
+    <div class="container mt-5">
+        <div class="card mb-3">
+            <div class="card-header">
+                Post info
+            </div>
+            <div class="card-body">
+                <h5 class="card-title" style="font-weigt:bold">Title: {{ $post->title }}</h5>
+                <p class="card-text" style="font-weigt:bold">Description: {{ $post->description }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                Post Creator
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Name: {{ $post->user->name }}</h5>
+                <p class="card-text">Email: {{ $post->user->email }}</p>
+                <p class="card-text">Created At:{{ $post->created_at }}</p>
 
-  </div>
-</div>
-
-<div class="card mt-4">
-  <div class="card-header">
-    User Info
-  </div>
-  <div class="card-body">
-    <h5 class="card-title"><span style="font-weight:bold">Name: {{$postData['posted_by']}} </span></h5>
-    <p class="card-text"><span style="font-weight:bold">Created At :2021-15-20 </span></p>
-   
-  </div>
-  
-</div>
-<a href="/posts" class="btn" style="margin: 30px;background-color:#8D8DAA; border-color:#8D8DAA;color: white;">Back</a>
-</div>
+            </div>
+        </div>
+    </div>
 @endsection
