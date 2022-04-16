@@ -29,13 +29,11 @@ class PostController extends Controller
 
         //get me the request data
         $data = request()->all();
-
-        // $title = request()->title;
         //store the request data in the db
         Post::create([
-            'title' => $data['title'],
+            'title'       => $data['title'],
             'description' => $data['description'],
-            'user_id' => $data['post-creator'],
+            'user_id'     => $data['post-creator'],
         ]);
 
         //redirect to /posts
@@ -64,8 +62,15 @@ class PostController extends Controller
         ]);
     }
 
-    public function update($id) {
-        $data = request()->all();
+    public function update($id,Request $request) {
+
+        $request->validate([
+            'title'          => 'required|min:3|unique:posts',
+            'description'    => 'required|min:10',
+            'post-creator'   => 'required|exists:users,id',
+        ]);
+
+        $data = $request->all();
 
         Post::whereId($id)->update([
             'title'       => $data['title'],
