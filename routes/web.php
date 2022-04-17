@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +25,11 @@ Route::get("/posts/{post}",[PostController::class, 'show'])->name('posts.show')-
 Route::get("/posts/{post}/edit",[PostController::class,'edit'])->name('posts.edit')->middleware('auth');
 Route::patch("/posts/{post}",[PostController::class,'update'])->name('posts.update')->middleware('auth');
 Route::delete("/posts/{post}",[PostController::class,'destroy'])->name('posts.destroy')->middleware('auth');
+
+Route::post('/comments/{postId}', [CommentController::class, 'create'])->name('comments.create')->middleware('auth');
+Route::delete('/comments/{postId}/{commentId}', [CommentController::class, 'delete'])->name('comments.delete')->middleware('auth');
+Route::get('/comments/{postId}/{commentId}', [CommentController::class, 'view'])->name('comments.view')->middleware('auth');
+Route::patch('/comments/{postId}/{commentId}', [CommentController::class, 'edit'])->name('comments.update')->middleware('auth');
 
 Auth::routes();
 

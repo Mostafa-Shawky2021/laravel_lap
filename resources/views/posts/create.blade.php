@@ -10,7 +10,7 @@
 
 
 
-      <form method="POST" action="{{ route('posts.store') }}" style="width:500px; margin:auto; border:1px solid #ccc; padding:1rem; margin-top:20px;">
+      <form method="POST" action="{{ route('posts.store') }}" style="width:500px; margin:auto; border:1px solid #ccc; padding:1rem; margin-top:20px;"  enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Title</label>
@@ -28,7 +28,9 @@
                     @endforeach
               </select>
           </div>
-
+          <div class="mb-3">
+              <input type="file" name="fileupload"/>
+          </div>
           <div class="mb-3">
                 <button type="submit" class="btn btn-success">Create Post</button>
           </div>

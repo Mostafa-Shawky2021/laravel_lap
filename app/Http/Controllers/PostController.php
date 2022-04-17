@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
 use App\Http\Requests\StorePostRequest;
+use Illuminate\Support\Facades\File;
 class PostController extends Controller
 {
 
@@ -25,10 +26,16 @@ class PostController extends Controller
             'users' => $user,
         ]);
     }
-    public function store( StorePostRequest $postRequest  ){
+    public function store( Request $request,  StorePostRequest $postRequest){
 
         //get me the request data
         $data = request()->all();
+        // Get image details
+//        if ($request->hasFile('avatar')) {
+//            $filename = time() . $request->fileupload->getClientOriginalName();
+//            // dd($filename);
+//            $request->fileupload->storeAs('images', $filename, 'public');
+//        }
         //store the request data in the db
         Post::create([
             'title'       => $data['title'],

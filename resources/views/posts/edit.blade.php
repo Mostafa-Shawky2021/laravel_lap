@@ -1,5 +1,4 @@
-@extends('layout.app')
-
+@extends('layouts.app')
 
 @section('content')
     @foreach ($errors->all() as $error)
@@ -7,6 +6,7 @@
             {{$error}}
         </div>
     @endforeach
+    <div class="container">
       <form method="POST" action="{{ route('posts.update',['post'=>$post['id']]) }}">
           @method('PATCH')
           @csrf
@@ -30,4 +30,6 @@
                 <button type="submit" class="btn btn-success">Edit Post</button>
           </div>
         </form>
+    </div>
+
 @endsection
