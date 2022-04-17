@@ -11,6 +11,7 @@ class CommentController extends Controller
     public function create($postId)
     {
         $post = Post::findOrFail($postId);
+
         $req = request();
 
         if ($req->comment) {
