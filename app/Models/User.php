@@ -11,4 +11,8 @@ class User extends Model implements AuthenticatableContract
     use HasFactory;
     use Authenticatable;
     protected $fillable = ['name','email','password'];
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
 }

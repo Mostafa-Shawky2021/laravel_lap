@@ -26,10 +26,10 @@ Route::get("/posts/{post}/edit",[PostController::class,'edit'])->name('posts.edi
 Route::patch("/posts/{post}",[PostController::class,'update'])->name('posts.update')->middleware('auth');
 Route::delete("/posts/{post}",[PostController::class,'destroy'])->name('posts.destroy')->middleware('auth');
 
-Route::post('/comments/{postId}', [CommentController::class, 'create'])->name('comments.create')->middleware('auth');
-Route::delete('/comments/{postId}/{commentId}', [CommentController::class, 'delete'])->name('comments.delete')->middleware('auth');
-Route::get('/comments/{postId}/{commentId}', [CommentController::class, 'view'])->name('comments.view')->middleware('auth');
-Route::patch('/comments/{postId}/{commentId}', [CommentController::class, 'edit'])->name('comments.update')->middleware('auth');
+Route::post('/comments/{userId}', [CommentController::class, 'store'])->name('comments.store')->middleware('auth');
+Route::get('/comments/{userId}',  [CommentController::class, 'view'])->name('comments.view')->middleware('auth');
+//Route::patch('/comments/{postId}/{commentId}', [CommentController::class, 'edit'])->name('comments.update')->middleware('auth');
+Route::delete('/comments/{commentId}', [CommentController::class, 'delete'])->name('comments.delete')->middleware('auth');
 
 Auth::routes();
 
