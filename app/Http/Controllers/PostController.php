@@ -29,18 +29,18 @@ class PostController extends Controller
     public function store( Request $request,  StorePostRequest $postRequest){
 
         //get me the request data
-        $data = request()->all();
-        // Get image details
-//        if ($request->hasFile('avatar')) {
-//            $filename = time() . $request->fileupload->getClientOriginalName();
-//            // dd($filename);
-//            $request->fileupload->storeAs('images', $filename, 'public');
-//        }
+        $postData = $request->all();
+
+        //Store image in public and return its path to store in database
+        $imgPath = $request->has('post-img')  ?  $postData['post-img']->store('public') : '';
+
+
         //store the request data in the db
         Post::create([
-            'title'       => $data['title'],
-            'description' => $data['description'],
-            'user_id'     => $data['post-creator'],
+            'title'       => $postData['title'],
+            'description' => $postData['description'],
+            'user_id'     => $postData['post-creator'],
+            'file'        => $imgPath,
         ]);
 
         //redirect to /posts

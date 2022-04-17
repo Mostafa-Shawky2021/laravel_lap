@@ -27,6 +27,7 @@ class StorePostRequest extends FormRequest
             'title'          => 'required|min:3|unique:posts',
             'description'    => 'required|min:10',
             'post-creator'   => 'required|exists:users,id',
+            'post-img'       => 'image|mimes:jpg,png,jpeg,gif'
         ];
     }
 
