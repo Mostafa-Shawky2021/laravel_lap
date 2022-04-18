@@ -13,7 +13,6 @@ class CommentController extends Controller
     {
         // Get data from comment form to insert data into comment table
         // We need to get post id to insert with comment to make the relation
-//        $post = Post::findOrFail($userId);
         $commentData = $request->comment;
         // Check if user send comment
         if (isset( $commentData )){
@@ -24,7 +23,7 @@ class CommentController extends Controller
             ]);
         }
 
-        //return redirect()->route('posts.show', $postId);
+        return redirect()->route('posts.show', $postId);
     }
     public function delete($postId, $commentId)
     {

@@ -36,10 +36,20 @@ Route::get('/comments/{userId}',  [CommentController::class, 'view'])->name('com
 Route::delete('/comments/{commentId}', [CommentController::class, 'delete'])->name('comments.delete')->middleware('auth');
 
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
+// Google
+Route::get('/gmail/auth/redirect', function(){
+    dd(Socialite::driver('google')->redirect());
+});
+
+Route::get('/gmail/auth/callback', function () {
+    $gmailUser = Socialite::driver('google')->user();
+
+});
+
+// Github
 Route::get('/auth/redirect', function () {
     return Socialite::driver('github')->redirect();
 });

@@ -13,7 +13,8 @@ class PostController extends Controller
 
     public function index(){
 
-        $posts = Post::latest()->paginate(5);
+        $posts = Post::latest()->with('user')->paginate(5);
+
         return view ('posts.index', [
             'posts' => $posts,
         ]);
@@ -72,7 +73,7 @@ class PostController extends Controller
     public function update($id,Request $request) {
 
         $request->validate([
-            'title'          => 'required|min:3|unique:posts',
+            'title'          => 'required|min:3',
             'description'    => 'required|min:10',
             'post-creator'   => 'required|exists:users,id',
         ]);

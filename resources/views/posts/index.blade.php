@@ -7,9 +7,10 @@
               <tr>
                 <th scope="col">Title</th>
                 <th scope="col">Posted By</th>
+                <th scope="col">Image</th>
                 <th scope="col">Created At</th>
                 <th scope="col">Slug</th>
-                <th scope="col">Actions</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -17,10 +18,11 @@
             @foreach ( $posts as $post)
               <tr>
 
-                <td>{{$post->title}}</td>
-                <td>{{$post->user->name}}</td>
-                <td>{{$post->created_at}}</td>
-                  <td>{{$post->slug}}</td>
+                <td> {{$post->title}}      </td>
+                <td> {{$post->user->name}} </td>
+                <td> <img src="{{ asset($post->file) }}"/> </td>
+                <td> {{$post->created_at}} </td>
+                <td> {{$post->slug}}       </td>
                 <td>
                     <a href="/posts/{{$post['id']}}" class="btn btn-info">View</a>
                     <a href="{{route('posts.edit',['post'=>$post['id']])}}" class="btn btn-primary" >Edit</a>
@@ -36,8 +38,10 @@
         <div style="text-align: right">
             <a href="{{route('posts.create')}}" class="btn btn-primary">Add post</a>
         </div>
+        <div class="flex justify-center items-center mt-10">
+            {!! $posts->links() !!}
+        </div>
 
-        {{ $posts->links() }}
     </div>
 
 

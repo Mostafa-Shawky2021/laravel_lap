@@ -35,6 +35,11 @@ return [
         'client_secret' => env('GITHUB_CLIENT_SECRET'),
         'redirect' => 'http://localhost:8000/auth/callback',
     ],
+    'gmail' => [
+        'client_id' => env('GMAIL_CLIENT_ID'),
+        'client_secret' => env('GMAIL_CLIENT_SECRET'),
+        'redirect' => 'http://localhost:8000/gmail/auth/callback',
+    ]
 
 
 ];
