@@ -2,7 +2,6 @@
 @section('content')
 
     <div class="container">
-   x
         <table class="table mt-4 table-style">
             <thead>
               <tr>
@@ -14,8 +13,10 @@
               </tr>
             </thead>
             <tbody>
+
             @foreach ( $posts as $post)
               <tr>
+
                 <td>{{$post->title}}</td>
                 <td>{{$post->user->name}}</td>
                 <td>{{$post->created_at}}</td>

@@ -6,10 +6,12 @@
             {{$error}}
         </div>
     @endforeach
+
     <div class="container">
-      <form method="POST" action="{{ route('posts.update',['post'=>$post['id']]) }}">
+      <form class="form-edit" method="POST" action="{{ route('posts.update',['post'=>$post['id']]) }}">
           @method('PATCH')
           @csrf
+          <h1 class="title">Edit post</h1>
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Title</label>
             <input type="text" name="title" class="form-control" id="exampleFormControlInput1" value="{{$post['title']}}">

@@ -17,11 +17,11 @@ class PostController extends Controller
         return view ('posts.index', [
             'posts' => $posts,
         ]);
+
     }
 
     public function create(){
         $user = User::all();
-
         return view('posts.create', [
             'users' => $user,
         ]);

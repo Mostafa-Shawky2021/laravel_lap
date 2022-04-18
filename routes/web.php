@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +15,8 @@ use App\Http\Controllers\CommentController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,7 +30,7 @@ Route::get("/posts/{post}/edit",[PostController::class,'edit'])->name('posts.edi
 Route::patch("/posts/{post}",[PostController::class,'update'])->name('posts.update')->middleware('auth');
 Route::delete("/posts/{post}",[PostController::class,'destroy'])->name('posts.destroy')->middleware('auth');
 
-Route::post('/comments/{userId}', [CommentController::class, 'store'])->name('comments.store')->middleware('auth');
+Route::post('/comments/{postId}', [CommentController::class, 'store'])->name('comments.store')->middleware('auth');
 Route::get('/comments/{userId}',  [CommentController::class, 'view'])->name('comments.view')->middleware('auth');
 //Route::patch('/comments/{postId}/{commentId}', [CommentController::class, 'edit'])->name('comments.update')->middleware('auth');
 Route::delete('/comments/{commentId}', [CommentController::class, 'delete'])->name('comments.delete')->middleware('auth');
@@ -34,3 +38,32 @@ Route::delete('/comments/{commentId}', [CommentController::class, 'delete'])->na
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::get('/auth/redirect', function () {
+    return Socialite::driver('github')->redirect();
+});
+
+Route::get('/auth/callback', function () {
+    $githubUser = Socialite::driver('github')->user();
+
+
+    $user = User::where('email', $githubUser->email )->first();
+
+    // If user email exist in database login
+    if( $user ) {
+        Auth::login($user);
+    } else {
+        User::create([
+            'name'  => $githubUser->nickname,
+            'email' => $githubUser->email,
+        ]);
+        Auth::login($user);
+
+    }
+
+    return redirect('/posts');
+
+
+
+});

@@ -25,7 +25,6 @@ class HomeController extends Controller
     public function index()
     {
         $post = Post::find(10);
-        dd($post);
         return view('home');
     }
 }

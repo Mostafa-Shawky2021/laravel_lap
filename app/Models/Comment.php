@@ -10,7 +10,6 @@ class Comment extends Model
     use HasFactory;
     protected $fillable = [
         'body',
-//        'user_id',
         'commentable_id',
         'commentable_type'
     ];
@@ -18,8 +17,5 @@ class Comment extends Model
     {
         return $this->morphTo();
     }
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+
 }

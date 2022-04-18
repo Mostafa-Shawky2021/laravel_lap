@@ -1,3 +1,4 @@
+
 .table-style {
     border: 1px solid #e7e7e7
 }
@@ -10,4 +11,15 @@
     vertical-align: center;
     text-align: center;
 }
-
+.form-edit {
+    width: 600px;
+    margin: auto;
+    bordeR: 1px solid #f3f3f3;
+    padding: 24px 36px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.title {
+    color: #ababab;
+    font-weight: bold;
+    text-align: center;
+}

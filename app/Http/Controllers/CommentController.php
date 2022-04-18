@@ -3,25 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
-use App\Models\User;
+use App\Models\Post ;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
 
-    public function store(Request $request,$userId)
+    public function store(Request $request,$postId)
     {
         // Get data from comment form to insert data into comment table
-        // We need to get user id to insert with comment to make the relation
-        $user = User::findOrFail($userId);
+        // We need to get post id to insert with comment to make the relation
+//        $post = Post::findOrFail($userId);
         $commentData = $request->comment;
-
         // Check if user send comment
         if (isset( $commentData )){
             Comment::create([
                 'body'             => $commentData,
-                'commentable_id'   => (int) $userId,
-                'commentable_type' => User::class,
+                'commentable_id'   => (int) $postId,
+                'commentable_type' => Post::class,
             ]);
         }
 
